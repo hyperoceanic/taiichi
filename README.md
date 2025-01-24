@@ -1,5 +1,7 @@
 # Taiichi
 
+A Kanban simulator, written in Elixir with the ECSx library.
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
