@@ -24,7 +24,7 @@ defmodule Taiichi.Systems.WorkersExendEffort do
 
         task_name = HasAName.get(task_id)
         effort_remaining = EffortRemaining.get(task_id)
-        worker_effort = WorkerEffort.get(worker_id)
+
         assignment_effort = AssignmentEffort.get(assignment_id)
 
         IO.puts """

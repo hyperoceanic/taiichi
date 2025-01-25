@@ -24,30 +24,50 @@ defmodule Taiichi.Manager do
     # Load ephemeral components during first server start and again
     # on every subsequent app restart
 
-    task_id = Ecto.UUID.generate()
-    EffortRequired.add(task_id, 120)
-    EffortRemaining.add(task_id, 120)
-    HasAName.add(task_id, "Task One")
 
     worker_id = Ecto.UUID.generate()
     HasAName.add(worker_id, "Mark")
     WorkerEffort.add(worker_id, 30)
 
+    worker_id2 = Ecto.UUID.generate()
+    WorkerEffort.add(worker_id2, 25)
+    HasAName.add(worker_id2, "Joe")
+
+    task_id = Ecto.UUID.generate()
+    EffortRequired.add(task_id, 120)
+    EffortRemaining.add(task_id, 120)
+    HasAName.add(task_id, "Task One")
+
     assignment_id = Ecto.UUID.generate()
     TaskAssignment.add(assignment_id, task_id)
     AssignmentWorker.add(assignment_id, worker_id)
     AssignmentEffort.add(assignment_id, 37)
-    HasAName.add(assignment_id, "Assignment ONE")
-
-    worker_id2 = Ecto.UUID.generate()
-    WorkerEffort.add(worker_id2, 25)
-    HasAName.add(worker_id2, "Joe")
+    HasAName.add(assignment_id, "Assignment ONE A")
 
     assignment_id2 = Ecto.UUID.generate()
     TaskAssignment.add(assignment_id2, task_id)
     AssignmentWorker.add(assignment_id2, worker_id2)
     AssignmentEffort.add(assignment_id2, 17)
-    HasAName.add(assignment_id2, "Assignment TWO")
+    HasAName.add(assignment_id2, "Assignment ONE B")
+
+    task_id2 = Ecto.UUID.generate()
+    EffortRequired.add(task_id2, 100)
+    EffortRemaining.add(task_id2, 100)
+    HasAName.add(task_id2, "Task TWO")
+
+    assignment_id3 = Ecto.UUID.generate()
+    TaskAssignment.add(assignment_id3, task_id2)
+    AssignmentWorker.add(assignment_id3, worker_id)
+    AssignmentEffort.add(assignment_id3, 17)
+    HasAName.add(assignment_id3, "Assignment TWO A")
+
+    # assignment_id4 = Ecto.UUID.generate()
+    # TaskAssignment.add(assignment_id4, task_id2)
+    # AssignmentWorker.add(assignment_id4, worker_id2)
+    # AssignmentEffort.add(assignment_id4, 12)
+    # HasAName.add(assignment_id2, "Assignment TWO B")
+
+
   end
 
   # Declare all valid Component types
