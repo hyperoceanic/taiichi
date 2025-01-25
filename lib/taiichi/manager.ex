@@ -7,9 +7,7 @@ defmodule Taiichi.Manager do
   alias Taiichi.Components.AssignmentEffort
   alias Taiichi.Components.AssignmentWorker
   alias Taiichi.Components.TaskAssignment
-  alias Taiichi.Components.Association
   alias Taiichi.Components.HasAName
-  alias Taiichi.Components.WorkerAssignment
   alias Taiichi.Components.WorkerEffort
   alias Taiichi.Components.EffortRemaining
   alias Taiichi.Components.EffortRequired
@@ -20,53 +18,43 @@ defmodule Taiichi.Manager do
     :ok
   end
 
+  def create_worker(name, effort) do
+    id = Ecto.UUID.generate()
+    HasAName.add(id, name)
+    WorkerEffort.add(id, effort)
+    id
+  end
+
+  def create_task(name, effort) do
+    id = Ecto.UUID.generate()
+    HasAName.add(id, name)
+    EffortRequired.add(id, effort)
+    EffortRemaining.add(id, effort)
+    id
+  end
+
+  def create_assignment(name, task_id, worker_id) do
+    id = Ecto.UUID.generate()
+    HasAName.add(id, name)
+    TaskAssignment.add(id, task_id)
+    AssignmentWorker.add(id, worker_id)
+    AssignmentEffort.add(id, 0)
+  end
+
+
   def startup do
     # Load ephemeral components during first server start and again
     # on every subsequent app restart
 
+    mark = create_worker("Mark", 30)
+    joe = create_worker("Joe", 25)
 
-    worker_id = Ecto.UUID.generate()
-    HasAName.add(worker_id, "Mark")
-    WorkerEffort.add(worker_id, 30)
+    task1 = create_task( "Task One", 120)
+    create_assignment("Assignment ONE M", task1, mark)
+    create_assignment("Assignment ONE J", task1, joe)
 
-    worker_id2 = Ecto.UUID.generate()
-    WorkerEffort.add(worker_id2, 25)
-    HasAName.add(worker_id2, "Joe")
-
-    task_id = Ecto.UUID.generate()
-    EffortRequired.add(task_id, 120)
-    EffortRemaining.add(task_id, 120)
-    HasAName.add(task_id, "Task One")
-
-    assignment_id = Ecto.UUID.generate()
-    TaskAssignment.add(assignment_id, task_id)
-    AssignmentWorker.add(assignment_id, worker_id)
-    AssignmentEffort.add(assignment_id, 37)
-    HasAName.add(assignment_id, "Assignment ONE A")
-
-    assignment_id2 = Ecto.UUID.generate()
-    TaskAssignment.add(assignment_id2, task_id)
-    AssignmentWorker.add(assignment_id2, worker_id2)
-    AssignmentEffort.add(assignment_id2, 17)
-    HasAName.add(assignment_id2, "Assignment ONE B")
-
-    task_id2 = Ecto.UUID.generate()
-    EffortRequired.add(task_id2, 100)
-    EffortRemaining.add(task_id2, 100)
-    HasAName.add(task_id2, "Task TWO")
-
-    assignment_id3 = Ecto.UUID.generate()
-    TaskAssignment.add(assignment_id3, task_id2)
-    AssignmentWorker.add(assignment_id3, worker_id)
-    AssignmentEffort.add(assignment_id3, 17)
-    HasAName.add(assignment_id3, "Assignment TWO A")
-
-    # assignment_id4 = Ecto.UUID.generate()
-    # TaskAssignment.add(assignment_id4, task_id2)
-    # AssignmentWorker.add(assignment_id4, worker_id2)
-    # AssignmentEffort.add(assignment_id4, 12)
-    # HasAName.add(assignment_id2, "Assignment TWO B")
-
+    task2 = create_task( "Task Two", 100)
+    create_assignment("Assignment Two M", task2, mark)
 
   end
 
@@ -97,8 +85,9 @@ defmodule Taiichi.Manager do
   def systems do
     [
       Taiichi.Systems.Driver,
+      Taiichi.Systems.WorkerAssignmentBalancer,
+      Taiichi.Systems.WorkersExendEffort,
       Taiichi.Systems.TaskWorkCompleter,
-      Taiichi.Systems.WorkersExendEffort
     ]
   end
 end

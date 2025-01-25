@@ -22,6 +22,8 @@ defmodule Taiichi.Systems.TaskWorkCompleter do
             IO.puts("#{worker_name} is has finished working on '#{task_name}'.")
 
             AssignmentWorker.remove(assignment_id)
+            #AssignmentEffort.remove(assignment_id)
+
             TaskAssignment.remove(task_id)
         end
 

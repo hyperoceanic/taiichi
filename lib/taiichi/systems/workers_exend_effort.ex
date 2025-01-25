@@ -4,9 +4,7 @@ defmodule Taiichi.Systems.WorkersExendEffort do
   """
   @behaviour ECSx.System
 
-  alias Taiichi.Components.WorkerEffort
   alias Taiichi.Components.HasAName
-  alias Taiichi.Components.WorkerAssignment
   alias Taiichi.Components.EffortRemaining
   alias Taiichi.Components.TaskAssignment
   alias Taiichi.Components.AssignmentWorker
