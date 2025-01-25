@@ -7,7 +7,7 @@ defmodule Taiichi.Systems.Driver do
   @impl ECSx.System
   def run do
     # System logic
-    IO.puts "Driver"
+    IO.puts "----------------------------------------------"
     :ok
   end
 end

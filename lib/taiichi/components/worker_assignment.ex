@@ -1,6 +1,6 @@
 defmodule Taiichi.Components.WorkerAssignment do
   @moduledoc """
-  Documentation for WorkerAssignment components.
+  A worker takes part in a Worker has many Assignments.
   """
   use ECSx.Component,
     value: :binary,

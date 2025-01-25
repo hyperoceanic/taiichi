@@ -2,19 +2,29 @@
 
 A Kanban simulator, written in Elixir with the ECSx library.
 
-To start your Phoenix server:
+Board
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+Backlog
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Station
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Task
 
-## Learn more
+Assignment:
+Represents a worker being assigned to a task
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+WorkerAssigment worker_id assignment_id
+
+
+
+Worker
+
+Name
+
+
+AssignmentTask assignment_id, task_id
+Associates an assignment with a task
+
+AssignmentWorker assignment_id, worker_id
+
+TaskAssignment task_id, assignment_id

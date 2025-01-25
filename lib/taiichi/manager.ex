@@ -4,6 +4,9 @@ defmodule Taiichi.Manager do
   """
   use ECSx.Manager
 
+  alias Taiichi.Components.AssignmentWorker
+  alias Taiichi.Components.TaskAssignment
+  alias Taiichi.Components.Association
   alias Taiichi.Components.HasAName
   alias Taiichi.Components.WorkerAssignment
   alias Taiichi.Components.WorkerEffort
@@ -27,14 +30,38 @@ defmodule Taiichi.Manager do
     HasAName.add(task_id, "Task One")
 
     worker_id = Ecto.UUID.generate()
-    WorkerEffort.add(worker_id, 30)
-    WorkerAssignment.add(task_id, worker_id)
     HasAName.add(worker_id, "Mark")
+    WorkerEffort.add(worker_id, 30)
+
+    assignment_id = Ecto.UUID.generate()
+    TaskAssignment.add(assignment_id, task_id)
+    AssignmentWorker.add(assignment_id, worker_id)
+    HasAName.add(assignment_id, "Assignment ONE")
+
+    worker_id2 = Ecto.UUID.generate()
+    WorkerEffort.add(worker_id2, 25)
+    HasAName.add(worker_id2, "Joe")
+
+    assignment_id2 = Ecto.UUID.generate()
+    TaskAssignment.add(assignment_id2, task_id)
+    AssignmentWorker.add(assignment_id2, worker_id2)
+    HasAName.add(assignment_id2, "Assignment TWO")
   end
 
   # Declare all valid Component types
+  @spec components() :: [
+          Taiichi.Components.EffortRemaining
+          | Taiichi.Components.EffortRequired
+          | Taiichi.Components.HasAName
+          | Taiichi.Components.TaskAssignment
+          | Taiichi.Components.WorkerAssignment
+          | Taiichi.Components.WorkerEffort,
+          ...
+        ]
   def components do
     [
+      Taiichi.Components.AssignmentWorker,
+      Taiichi.Components.TaskAssignment,
       Taiichi.Components.HasAName,
       Taiichi.Components.WorkerAssignment,
       Taiichi.Components.WorkerEffort,
@@ -46,8 +73,10 @@ defmodule Taiichi.Manager do
   # Declare all Systems to run
   def systems do
     [
-      Taiichi.Systems.WorkersExendEffort,
-      Taiichi.Systems.Driver
+        Taiichi.Systems.Driver,
+        Taiichi.Systems.TaskWorkCompleter,
+        Taiichi.Systems.WorkersExendEffort,
+
     ]
   end
 end
