@@ -33,14 +33,13 @@ defmodule Taiichi.Manager do
     id
   end
 
-  def create_assignment(name, task_id, worker_id) do
+  def create_assignment(name, task, worker) do
     id = Ecto.UUID.generate()
     HasAName.add(id, name)
-    TaskAssignment.add(id, task_id)
-    AssignmentWorker.add(id, worker_id)
+    TaskAssignment.add(id, task)
+    AssignmentWorker.add(id, worker)
     AssignmentEffort.add(id, 0)
   end
-
 
   def startup do
     # Load ephemeral components during first server start and again
@@ -53,7 +52,7 @@ defmodule Taiichi.Manager do
     create_assignment("Assignment ONE M", task1, mark)
     create_assignment("Assignment ONE J", task1, joe)
 
-    task2 = create_task( "Task Two", 100)
+    task2 = create_task( "Task Two", 155)
     create_assignment("Assignment Two M", task2, mark)
 
   end
