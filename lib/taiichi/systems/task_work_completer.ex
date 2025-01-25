@@ -19,15 +19,25 @@ defmodule Taiichi.Systems.TaskWorkCompleter do
         if effort_remaining == 0 do
             worker_name = HasAName.get(worker_id)
             task_name = HasAName.get(task_id)
-            IO.puts("#{worker_name} is has finished working on '#{task_name}'.")
+            IO.puts("#{worker_name} has finished working on '#{task_name}', assignment ID #{assignment_id}.")
 
             AssignmentWorker.remove(assignment_id)
-
-            #AssignmentEffort.remove(assignment_id)
-
-            TaskAssignment.remove(task_id)
+            remove_task_assignment(assignment_id)
         end
-
     end
+  end
+
+  defp remove_task_assignment(assignment) do
+    IO.puts("*** remove_task_assignment #{assignment}")
+
+    if TaskAssignment.exists?(assignment) do
+        IO.puts("*** REMOVING #{assignment}")
+        TaskAssignment.remove(assignment)
+    end
+
+    if TaskAssignment.exists?(assignment) do
+        IO.puts("*** STILL #{assignment} ***")
+    end
+
   end
 end

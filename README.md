@@ -2,12 +2,6 @@
 
 A Kanban simulator, written in Elixir with the ECSx library.
 
-Board
-
-Backlog
-
-Station
-
 Task
 
 Assignment:
