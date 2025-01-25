@@ -10,7 +10,7 @@ defmodule Taiichi.Systems.WorkersExendEffort do
   alias Taiichi.Components.EffortRemaining
   alias Taiichi.Components.TaskAssignment
   alias Taiichi.Components.AssignmentWorker
-
+  alias Taiichi.Components.AssignmentEffort
 
   @impl ECSx.System
   def run do
@@ -25,16 +25,17 @@ defmodule Taiichi.Systems.WorkersExendEffort do
         task_name = HasAName.get(task_id)
         effort_remaining = EffortRemaining.get(task_id)
         worker_effort = WorkerEffort.get(worker_id)
+        assignment_effort = AssignmentEffort.get(assignment_id)
 
         IO.puts """
                     Task: '#{task_name}'
                       Assignment: '#{assignment_name}'
                       Worker: #{worker_name}
                       Effort Remaining: #{effort_remaining}
-                      Effort to apply: #{worker_effort}
+                      Effort to apply: #{assignment_effort}
                 """
 
-        effort_left = max(0, effort_remaining - worker_effort)
+        effort_left = max(0, effort_remaining - assignment_effort)
 
         EffortRemaining.update(task_id, effort_left)
 
