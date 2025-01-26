@@ -22,22 +22,9 @@ defmodule Taiichi.Systems.TaskWorkCompleter do
             IO.puts("#{worker_name} has finished working on '#{task_name}', assignment ID #{assignment_id}.")
 
             AssignmentWorker.remove(assignment_id)
-            remove_task_assignment(assignment_id)
+            TaskAssignment.remove(assignment_id)
         end
     end
   end
 
-  defp remove_task_assignment(assignment) do
-    IO.puts("*** remove_task_assignment #{assignment}")
-
-    if TaskAssignment.exists?(assignment) do
-        IO.puts("*** REMOVING #{assignment}")
-        TaskAssignment.remove(assignment)
-    end
-
-    if TaskAssignment.exists?(assignment) do
-        IO.puts("*** STILL #{assignment} ***")
-    end
-
-  end
 end

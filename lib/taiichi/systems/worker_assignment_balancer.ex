@@ -9,12 +9,6 @@ defmodule Taiichi.Systems.WorkerAssignmentBalancer do
   alias Taiichi.Components.AssignmentEffort
   alias Taiichi.Components.HasAName
 
-
-  def get_live_assignments(worker_id) do
-    dbg AssignmentWorker.search(worker_id)
-    |> Enum.filter(&AssignmentWorker.exists?(&1) )
-  end
-
   @impl ECSx.System
   def run do
     # System logic
@@ -23,7 +17,7 @@ defmodule Taiichi.Systems.WorkerAssignmentBalancer do
         worker_name = HasAName.get(worker_id)
 
         # TODO: I think search should have just returning rows that existed?
-        assignments = get_live_assignments(worker_id) # AssignmentWorker.search(worker_id)
+        assignments = AssignmentWorker.search(worker_id)
         count = Enum.count(assignments)
 
         if (count > 0) do
@@ -34,7 +28,7 @@ defmodule Taiichi.Systems.WorkerAssignmentBalancer do
             for assignment_id <- assignments do
                 worker_check = AssignmentWorker.get(assignment_id)
                 if (worker_check != worker_id), do: IO.puts("BAAAAD")
-                
+
                 assignment_name = HasAName.get(assignment_id)
                 old_effort = AssignmentEffort.get(assignment_id)
                 IO.puts("Updating assignment '#{assignment_name}' from #{old_effort} to #{new_effort}.")
