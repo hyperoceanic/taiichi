@@ -4,6 +4,7 @@ defmodule Taiichi.Kanban.Board do
 
   schema "boards" do
     field :name, :string
+    field :max_wip_per_person, :integer
 
     timestamps(type: :utc_datetime)
   end
@@ -11,7 +12,7 @@ defmodule Taiichi.Kanban.Board do
   @doc false
   def changeset(board, attrs) do
     board
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :max_wip_per_person])
+    |> validate_required([:name, :max_wip_per_person])
   end
 end

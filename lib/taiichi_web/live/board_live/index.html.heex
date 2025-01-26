@@ -13,6 +13,7 @@
   row_click={fn {_id, board} -> JS.navigate(~p"/boards/#{board}") end}
 >
   <:col :let={{_id, board}} label="Name">{board.name}</:col>
+  <:col :let={{_id, board}} label="WIP Limit">{board.max_wip_per_person}</:col>
   <:action :let={{_id, board}}>
     <div class="sr-only">
       <.link navigate={~p"/boards/#{board}"}>Show</.link>

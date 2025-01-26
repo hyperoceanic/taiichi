@@ -20,6 +20,7 @@ defmodule TaiichiWeb.BoardLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:name]} type="text" label="Name" />
+        <.input field={@form[:max_wip_per_person]} type="number" label="WIP Limit" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Board</.button>
         </:actions>
