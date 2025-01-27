@@ -13,4 +13,8 @@
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "JakeBecker.elixir-ls"
     },
+    "tailwindCSS.includeLanguages": {
+        "phoenix-heex": "html",
+        "elixir": "html",
+    },
 }
