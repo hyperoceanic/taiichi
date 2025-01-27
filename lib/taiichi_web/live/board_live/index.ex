@@ -32,6 +32,12 @@ defmodule TaiichiWeb.BoardLive.Index do
     |> assign(:board, nil)
   end
 
+  defp apply_action(socket, :run, _params) do
+    socket
+    |> assign(:page_title, "Listing Boards - RUN")
+    |> assign(:board, nil)
+  end
+
   @impl true
   def handle_info({TaiichiWeb.BoardLive.FormComponent, {:saved, board}}, socket) do
     {:noreply, stream_insert(socket, :boards, board)}

@@ -19,6 +19,7 @@
       <.link navigate={~p"/boards/#{board}"}>Show</.link>
     </div>
     <.link patch={~p"/boards/#{board}/edit"}>Edit</.link>
+    <.link patch={~p"/boards/#{board}/run"}>Run</.link>
   </:action>
   <:action :let={{id, board}}>
     <.link
