@@ -26,9 +26,6 @@ defmodule Taiichi.Systems.WorkerAssignmentBalancer do
             IO.puts("Balancing worker #{worker_name}, effort #{effort}, updating #{count} assignments to #{new_effort}.")
 
             for assignment_id <- assignments do
-                worker_check = AssignmentWorker.get(assignment_id)
-                if (worker_check != worker_id), do: IO.puts("BAAAAD")
-
                 assignment_name = HasAName.get(assignment_id)
                 old_effort = AssignmentEffort.get(assignment_id)
                 IO.puts("Updating assignment '#{assignment_name}' from #{old_effort} to #{new_effort}.")
