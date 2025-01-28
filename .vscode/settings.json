@@ -1,5 +1,20 @@
 {
     "cSpell.words": [
         "Taiichi"
-    ]
+    ],
+    "files.associations": {
+        "*.heex": "phoenix-heex",
+    },
+    "[elixir]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "JakeBecker.elixir-ls"
+    },
+    "[phoenix-heex]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "JakeBecker.elixir-ls"
+    },
+    "tailwindCSS.includeLanguages": {
+        "phoenix-heex": "html",
+        "elixir": "html",
+    },
 }

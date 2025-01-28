@@ -42,19 +42,6 @@ defmodule Taiichi.Manager do
   end
 
   def startup do
-    # Load ephemeral components during first server start and again
-    # on every subsequent app restart
-
-    mark = create_worker("Mark", 30)
-    joe = create_worker("Joe", 25)
-
-    task1 = create_task( "Task One", 120)
-    create_assignment("Assignment ONE M", task1, mark)
-    create_assignment("Assignment ONE J", task1, joe)
-
-    task2 = create_task( "Task Two", 155)
-    create_assignment("Assignment Two M", task2, mark)
-
   end
 
   # Declare all valid Component types
@@ -83,10 +70,11 @@ defmodule Taiichi.Manager do
   # Declare all Systems to run
   def systems do
     [
+      Taiichi.Systems.ClientEventHandler,
       Taiichi.Systems.Driver,
       Taiichi.Systems.WorkerAssignmentBalancer,
       Taiichi.Systems.WorkersExendEffort,
-      Taiichi.Systems.TaskWorkCompleter,
+      Taiichi.Systems.TaskWorkCompleter
     ]
   end
 end
