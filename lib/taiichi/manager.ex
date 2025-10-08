@@ -19,7 +19,7 @@ defmodule Taiichi.Manager do
   # Declare all valid Component types
   def components do
     [
-      # MyApp.Components.SampleComponent
+      Taiichi.Components.Probability
     ]
   end
 
