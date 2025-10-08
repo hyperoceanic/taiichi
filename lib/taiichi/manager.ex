@@ -19,6 +19,7 @@ defmodule Taiichi.Manager do
   # Declare all valid Component types
   def components do
     [
+      Taiichi.Components.Name,
       Taiichi.Components.Probability
     ]
   end
@@ -26,7 +27,7 @@ defmodule Taiichi.Manager do
   # Declare all Systems to run
   def systems do
     [
-      # MyApp.Systems.SampleSystem
+      Taiichi.Systems.Kanban
     ]
   end
 end
