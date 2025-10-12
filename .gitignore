@@ -38,3 +38,4 @@ npm-debug.log
 .lexical/lexical.log
 .DS_Store
 
+components.persistence

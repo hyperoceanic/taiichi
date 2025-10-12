@@ -13,6 +13,11 @@ defmodule Taiichi.Manager do
   def startup do
     # Load ephemeral components during first server start and again
     # on every subsequent app restart
+
+    entity = Ecto.UUID.generate()
+    Taiichi.Components.Name.add(entity, "Product Owner")
+    Taiichi.Components.Probability.add(entity, 0.75)
+
     :ok
   end
 
