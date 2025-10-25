@@ -4,17 +4,15 @@ defmodule Taiichi.Systems.Kanban do
   """
   @behaviour ECSx.System
 
-  alias Taiichi.Components.Probability
-  alias Taiichi.Components.Name
+  alias Taiichi.Components.ProductOwner
 
   @impl ECSx.System
   def run do
+    product_owners = ProductOwner.get_all()
 
-     for {entity, name} <- Name.get_all() do
-        probability = Probability.get(entity)
-        IO.puts("Entity: #{entity}, Name: #{name}, Probability: #{probability}")
-
-     end
+    Enum.each(product_owners, fn entity ->
+      ProductOwner.product_owner_may_create_backlog_items(entity)
+    end)
 
     # System logic
     :ok
