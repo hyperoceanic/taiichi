@@ -7,12 +7,14 @@ defmodule Taiichi.Manager do
   def setup do
     # Seed persistent components only for the first server start
     # (This will not be run on subsequent app restarts)
+    Logger.info("ECSx.Manager setup")
     :ok
   end
 
   def startup do
     # Load ephemeral components during first server start and again
     # on every subsequent app restart
+    Logger.info("ECSx.Manager setup")
     :ok
   end
 
