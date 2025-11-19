@@ -14,7 +14,7 @@ defmodule Taiichi.Manager do
   def startup do
     # Load ephemeral components during first server start and again
     # on every subsequent app restart
-    Logger.info("ECSx.Manager setup")
+    Logger.info("ECSx.Manager startup")
     :ok
   end
 
