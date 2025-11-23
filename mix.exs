@@ -34,6 +34,7 @@ defmodule Taiichi.MixProject do
   defp deps do
     [
       {:ecsx, "~> 0.5"},
+      {:ecsx_live_dashboard, "~> 0.1"},
       {:phoenix, "~> 1.8.1"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},

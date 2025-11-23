@@ -37,7 +37,10 @@ defmodule TaiichiWeb.Router do
     scope "/dev" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: TaiichiWeb.Telemetry
+      live_dashboard "/dashboard", metrics: TaiichiWeb.Telemetry,
+        additional_pages: [
+          ecsx: ECSx.LiveDashboard.Page
+        ]
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
