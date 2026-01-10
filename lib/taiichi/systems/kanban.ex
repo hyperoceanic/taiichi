@@ -16,10 +16,10 @@ defmodule Taiichi.Systems.Kanban do
          worker_name = Taiichi.Components.Name.get(worker_id)
          worker_probability = Taiichi.Components.Probability.get(worker_id)
 
-         Logger.info("Found #{worker_id}: #{worker_name}: #{worker_probability}")
-
          target = :rand.uniform()
-         if (target < worker_probability), do: Logger.info("  -> Creating work item from #{worker_name}.")
+         Logger.info("Found #{worker_id}: #{worker_name}: #{worker_probability} vs #{target}")
+
+         if (target <= worker_probability), do: Logger.info("  -> Creating work item from #{worker_name}.")
 
 
      end

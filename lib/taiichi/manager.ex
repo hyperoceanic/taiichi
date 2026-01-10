@@ -8,7 +8,6 @@ defmodule Taiichi.Manager do
   alias Taiichi.Components.Name
   alias Taiichi.Components.Probability
 
-
   def setup do
     # Seed persistent components only for the first server start
     # (This will not be run on subsequent app restarts)
@@ -42,6 +41,9 @@ defmodule Taiichi.Manager do
   # Declare all valid Component types
   def components do
     [
+      Taiichi.Components.WorkSize,
+      Taiichi.Components.WorkState,
+      Taiichi.Components.WorkRemaining,
       Taiichi.Components.Probability,
       Taiichi.Components.WorkCreator,
       Taiichi.Components.Name
